@@ -1,14 +1,7 @@
 from nicegui import ui, events
-import asyncio
-import sys
 from itertools import count, takewhile
 from typing import Iterator
 import time
-import bleak
-from bleak import BleakClient, BleakScanner
-from bleak.backends.characteristic import BleakGATTCharacteristic
-from bleak.backends.device import BLEDevice
-from bleak.backends.scanner import AdvertisementData
 import json
 
 
@@ -89,20 +82,7 @@ def confCard() -> None:
                 ui.label(f"{pin_key}: {pin_value}")
 
 async def sendData(data):
-    print(data)
-    await client.write_gatt_char(char.uuid, b'\x01') # this send data to device
-
-async def run():
-    async with BleakClient(macAddress) as client:
-        while 1:
-            try:
-                # Read the value of a characteristic
-                value = await client.read_gatt_char("b1ec5ab1-f818-4398-b3d3-b9fe79391b34")
-                bluetoothLog.push(f"Received: {value.decode()}")
-                #print("Received:", value.decode())
-            except bleak.exc.BleakDBusError:
-                bluetoothLog.push("device disconndected")
-                #print("device disconnected")
+    pass # code to send data
 
 def mouse_handler(e: events.MouseEventArguments):
     global selected_Pin
@@ -117,7 +97,7 @@ def mouse_handler(e: events.MouseEventArguments):
 
 
 
-start_run_button = ui.button("start run()", on_click=run)
+start_run_button = ui.button("start run()")
 testbutton = ui.button("send a byte to esp32c3", color="red", on_click=lambda: sendData("test"))
 bluetoothLog = ui.log(max_lines=10).classes('w-full h-20')
 ui.separator()
