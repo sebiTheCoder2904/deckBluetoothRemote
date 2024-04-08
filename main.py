@@ -38,7 +38,7 @@ esp32_configuration = {
     "UART_TX_CHAR_UUID": "6E400003-B5A3-F393-E0A9-E50E24DCCA9E",
     "pins": {
         "D0":  {"pinmode": "output", "mode": "pwm", "map2": "Left Trigger"},
-        "D1":  {"pinmode": "output", "mode": "", "map2": ""},
+        "D1":  {"pinmode": "output", "mode": "analog", "map2": "Left Joystick"},
         "D2":  {"pinmode": "output", "mode": "", "map2": ""},
         "D3":  {"pinmode": "output", "mode": "", "map2": ""},
         "D4":  {"pinmode": "output", "mode": "", "map2": ""},
@@ -128,7 +128,7 @@ with ui.card().style("width: 695px;"):
         ui.button("save json")
 ui.separator()
 with ui.row():
-    ii = ui.interactive_image("/home/deck/Documents/Projects/deckBluetoothRemote/resources/cut_esp32.png",
+    ii = ui.interactive_image("resources/cut_esp32.png",
                         on_mouse=mouse_handler, 
                         events=['mousedown'])
     confCard()
